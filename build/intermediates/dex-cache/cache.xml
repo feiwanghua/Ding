@@ -3,21 +3,12 @@
 
     <item
         is-multidex="true"
-        jar="/Users/feiwanghua/Desktop/MyDingDing/app/libs/baidumapapi_util_v4_1_1.jar"
+        jar="/Users/feiwanghua/.android/build-cache/a7cf2ca10bcd2fc1476991449dbf075e53918e12/output/jars/classes.jar"
         jumboMode="true"
         optimize="true"
-        revision="23.0.3"
-        sha1="d5630c44b212b90ad64c2bc2a994cbf28d1b08a7">
-        <dex dex="/Users/feiwanghua/Desktop/MyDingDing/app/build/intermediates/transforms/dex/debug/folders/1000/2/baidumapapi_util_v4_1_1_8d1610c5de590aa853c1c7a0fdba4c3b5e17eec5/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/feiwanghua/Desktop/MyDingDing/app/libs/locSDK_6.13.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="2cdb37444b41b42e1ce5a8a27e5d3c22e1c57479">
-        <dex dex="/Users/feiwanghua/Desktop/MyDingDing/app/build/intermediates/transforms/dex/debug/folders/1000/2/locSDK_6.13_a47e74b541a3811e98b469cd65bee6ca2139f025/classes.dex" />
+        revision="25.0.0"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b7c861d7cf7898e1e2f110402c628df479a2fc4a/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -26,115 +17,259 @@
         optimize="true"
         revision="23.0.3"
         sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
-        <dex dex="/Users/feiwanghua/Desktop/MyDingDing/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.4.0_7026618d2a617db972a81a7be1d4bcab70b966ab/classes.dex" />
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.4.0_7026618d2a617db972a81a7be1d4bcab70b966ab/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/feiwanghua/Desktop/MyDingDing/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
+        jar="/Users/feiwanghua/.android/build-cache/d014119bb3fd28f1606949499814505f1e6e771a/output/jars/libs/cosinesdk.jar"
         jumboMode="true"
         optimize="true"
-        revision="23.0.3"
-        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
-        <dex dex="/Users/feiwanghua/Desktop/MyDingDing/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.4.0_d829099e0cca009c416477be6e162e42c6ba18db/classes.dex" />
+        revision="25.0.0"
+        sha1="f27af6077dfb2644f3ab9504a4d03dfc2397cf0d">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/10/cosinesdk_5c3056bf344bc41ef6d667ceea75f791dbfd8a9f/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/feiwanghua/Desktop/MyDingDing/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
+        jar="/Users/feiwanghua/.android/build-cache/3c047f9524328cbd92d7d8393ecc70d48313719f/output/jars/libs/nrtc-sdk.jar"
         jumboMode="true"
         optimize="true"
-        revision="23.0.3"
-        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
-        <dex dex="/Users/feiwanghua/Desktop/MyDingDing/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.4.0_8bf9023ab69c75bbc81792af3e65bf39518d6f3e/classes.dex" />
+        revision="25.0.0"
+        sha1="d070ef377334cb2ed294868ce79479eb7bd9f5bb">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/10/nrtc-sdk_b24e46259fdd034381c5b636ba3175053dd6ffd7/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/feiwanghua/Desktop/MyDingDing/app/libs/baidumapapi_radar_v4_1_1.jar"
+        jar="/Users/feiwanghua/Desktop/Ding/app/libs/baidumapapi_search_v4_1_1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="b73dac26619f94061d28c54a7982ae8e0e783903">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/2/baidumapapi_search_v4_1_1_ccb330cfacea28a42b3d2d2b64a664cfec8e18e2/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/feiwanghua/.android/build-cache/77cf9e4aae0a96f6bb4c4824d82e6a3c4f1352dc/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e8b239d51953d6bad3cd9ee88848638f314eead4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/feiwanghua/Desktop/Ding/app/libs/baidumapapi_radar_v4_1_1.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.3"
         sha1="ec3b3b79fdcc8fe059676554e31053027043edf8">
-        <dex dex="/Users/feiwanghua/Desktop/MyDingDing/app/build/intermediates/transforms/dex/debug/folders/1000/2/baidumapapi_radar_v4_1_1_0814b653a8910038fbe6f24f8b9c238e42d7fb32/classes.dex" />
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/2/baidumapapi_radar_v4_1_1_764f60b42b92a85fb6504f0e1023e2f6d6ead0e2/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/feiwanghua/Desktop/MyDingDing/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
+        jar="/Users/feiwanghua/Desktop/Ding/app/libs/locSDK_6.13.jar"
         jumboMode="true"
         optimize="true"
-        revision="23.0.3"
-        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
-        <dex dex="/Users/feiwanghua/Desktop/MyDingDing/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-23.4.0_178ec3eca6a7688bdd357b1b85f6a53fe32da611/classes.dex" />
+        revision="25.0.0"
+        sha1="2cdb37444b41b42e1ce5a8a27e5d3c22e1c57479">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/2/locSDK_6.13_29d8763e7d04ef2819d323c599bc8648c764e801/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/feiwanghua/Desktop/MyDingDing/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jar="/Users/feiwanghua/.android/build-cache/0395673e3d3f84a1a57c0788ffa00217ab9787ad/output/jars/classes.jar"
         jumboMode="true"
         optimize="true"
-        revision="23.0.3"
-        sha1="ca5054dbe2fa6a9c3adba3c7b06f45c25542af3f">
-        <dex dex="/Users/feiwanghua/Desktop/MyDingDing/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_f114f03e5b1be0cab5e93e0424e3b594474913a7/classes.dex" />
+        revision="25.0.0"
+        sha1="6a1cc50e47b1b713cf98ce166b326ae017628be3">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_df56f6c41756aebeca19c884cf844548480325d9/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/feiwanghua/Desktop/MyDingDing/app/libs/baidumapapi_base_v4_1_1.jar"
+        jar="/Users/feiwanghua/Desktop/Ding/app/libs/locSDK_6.13.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.3"
-        sha1="00cd7d6a741c6a922c9cf7b0db52a357ebf12cdb">
-        <dex dex="/Users/feiwanghua/Desktop/MyDingDing/app/build/intermediates/transforms/dex/debug/folders/1000/2/baidumapapi_base_v4_1_1_2827dbee023c795bc70d9050bd5e77380444c46b/classes.dex" />
+        sha1="2cdb37444b41b42e1ce5a8a27e5d3c22e1c57479">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/2/locSDK_6.13_29d8763e7d04ef2819d323c599bc8648c764e801/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/feiwanghua/Desktop/MyDingDing/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
+        jar="/Users/feiwanghua/Desktop/Ding/app/libs/baidumapapi_cloud_v4_1_1.jar"
         jumboMode="true"
         optimize="true"
-        revision="23.0.3"
-        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
-        <dex dex="/Users/feiwanghua/Desktop/MyDingDing/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.4.0_e8dc987622af522230d4e9893524330eca2b612a/classes.dex" />
+        revision="25.0.0"
+        sha1="93ef91d018051b8b5e001eb5e106b983fee8a549">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/2/baidumapapi_cloud_v4_1_1_09d4755b30069c87c774bc77d2f24298efdd57e4/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/feiwanghua/Desktop/MyDingDing/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
+        jar="/Users/feiwanghua/Desktop/Ding/app/libs/baidumapapi_map_v4_1_1.jar"
         jumboMode="true"
         optimize="true"
-        revision="23.0.3"
-        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
-        <dex dex="/Users/feiwanghua/Desktop/MyDingDing/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.4.0_0d027128424782b8b02a0eda335902a8716d1fb3/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/feiwanghua/Desktop/MyDingDing/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="c334f9dc026f32e1b771763b7231b99eea82006f">
-        <dex dex="/Users/feiwanghua/Desktop/MyDingDing/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_d030ab43ef185dc2bd2c9655f21db96e56b379d3/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/feiwanghua/Desktop/MyDingDing/app/libs/baidumapapi_map_v4_1_1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
+        revision="25.0.0"
         sha1="930064f0a91ff20ceb8dd4504b7dadec5aabea82">
-        <dex dex="/Users/feiwanghua/Desktop/MyDingDing/app/build/intermediates/transforms/dex/debug/folders/1000/2/baidumapapi_map_v4_1_1_1ef01f460b08901854ab5189ae271d4c46a2e234/classes.dex" />
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/2/baidumapapi_map_v4_1_1_a315b89167ff76b32ac494e7baa48bb4dde53b47/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/feiwanghua/Desktop/MyDingDing/app/libs/baidumapapi_search_v4_1_1.jar"
+        jar="/Users/feiwanghua/Desktop/Ding/app/libs/baidumapapi_util_v4_1_1.jar"
         jumboMode="true"
         optimize="true"
-        revision="23.0.3"
-        sha1="b73dac26619f94061d28c54a7982ae8e0e783903">
-        <dex dex="/Users/feiwanghua/Desktop/MyDingDing/app/build/intermediates/transforms/dex/debug/folders/1000/2/baidumapapi_search_v4_1_1_a5cd5cb5eb8dacee624fa1d593021abefaa6db1d/classes.dex" />
+        revision="25.0.0"
+        sha1="d5630c44b212b90ad64c2bc2a994cbf28d1b08a7">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/2/baidumapapi_util_v4_1_1_f9386325f72c0b16fe176cce3db52e67de82a93b/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/feiwanghua/Desktop/MyDingDing/app/libs/baidumapapi_cloud_v4_1_1.jar"
+        jar="/Users/feiwanghua/.android/build-cache/b0cb596d23e84c4c6a52bb3aeb007859da3355d5/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c8470cd1d115ce6d28bc80167cffc627bf44a259">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_427fd06352e94897abe4c5ce739855d2873a1205/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/feiwanghua/Desktop/Ding/app/libs/baidumapapi_radar_v4_1_1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ec3b3b79fdcc8fe059676554e31053027043edf8">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/2/baidumapapi_radar_v4_1_1_764f60b42b92a85fb6504f0e1023e2f6d6ead0e2/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_43fbd9cb346d33d7e28ca3def39a4eaf4155277a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/feiwanghua/Desktop/Ding/app/libs/baidumapapi_cloud_v4_1_1.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.3"
         sha1="93ef91d018051b8b5e001eb5e106b983fee8a549">
-        <dex dex="/Users/feiwanghua/Desktop/MyDingDing/app/build/intermediates/transforms/dex/debug/folders/1000/2/baidumapapi_cloud_v4_1_1_a5569b6d73b3d6fc1f73ffd9e4c56027b380f6a9/classes.dex" />
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/2/baidumapapi_cloud_v4_1_1_09d4755b30069c87c774bc77d2f24298efdd57e4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/feiwanghua/Desktop/Ding/app/libs/baidumapapi_base_v4_1_1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="00cd7d6a741c6a922c9cf7b0db52a357ebf12cdb">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/2/baidumapapi_base_v4_1_1_dc56ea053e6375ed33996faa3bf7f5b282e41c1a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/feiwanghua/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.4.0_7026618d2a617db972a81a7be1d4bcab70b966ab/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/feiwanghua/.android/build-cache/079271e3ed0a97e85969d7e6d19050453dd31840/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_1830f6ba1b76e32e716769425bdde5460bad5616/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/feiwanghua/Desktop/Ding/app/libs/baidumapapi_base_v4_1_1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="00cd7d6a741c6a922c9cf7b0db52a357ebf12cdb">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/2/baidumapapi_base_v4_1_1_dc56ea053e6375ed33996faa3bf7f5b282e41c1a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/feiwanghua/.android/build-cache/d014119bb3fd28f1606949499814505f1e6e771a/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="8bf3afd017a0c66477ff95c29d52f5f0f1bce3fc">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_10e2582df2c96b1363071e5590b9549474c8fc25/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/feiwanghua/Desktop/Ding/app/libs/baidumapapi_map_v4_1_1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="930064f0a91ff20ceb8dd4504b7dadec5aabea82">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/2/baidumapapi_map_v4_1_1_a315b89167ff76b32ac494e7baa48bb4dde53b47/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/feiwanghua/Desktop/Ding/app/libs/baidumapapi_search_v4_1_1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="b73dac26619f94061d28c54a7982ae8e0e783903">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/2/baidumapapi_search_v4_1_1_ccb330cfacea28a42b3d2d2b64a664cfec8e18e2/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/feiwanghua/.android/build-cache/61016678310ccdfe44ae610f93cea8ad85e295d1/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="8e9b735c980869617858de204e30db133845901e">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_3115e76601c0c0e04dfa28541375de74e7338ac6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/feiwanghua/Desktop/Ding/app/libs/baidumapapi_util_v4_1_1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="d5630c44b212b90ad64c2bc2a994cbf28d1b08a7">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/2/baidumapapi_util_v4_1_1_f9386325f72c0b16fe176cce3db52e67de82a93b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/feiwanghua/.android/build-cache/dbbdafecfaf8a4091868cf35dd349679588b6af4/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_9c66e45954d8b30f68cd53ed11f061e54e41e96b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/feiwanghua/.android/build-cache/079271e3ed0a97e85969d7e6d19050453dd31840/output/jars/libs/internal_impl-23.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.4.0_ae2f0062912c1b50ff2ebeb258834b0796db7357/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="b21e2e7a2e903afaa113be5d9c4bd8b2ebea4d05">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_455ca2941e013c9a79795cc5d27be5e642d0c886/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/feiwanghua/.android/build-cache/ab3082178231cebe21b1d3c768faf99a92611a06/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="9ad6fc119e24f8824604d6591a5f62e3c8ae5891">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e8a85f8aae5c1fc249d2466db7f20745893fe271/classes.dex" />
     </item>
 
 </items>

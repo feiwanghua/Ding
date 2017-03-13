@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="lucene-3.3.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.android/build-cache/ab3082178231cebe21b1d3c768faf99a92611a06/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/ab3082178231cebe21b1d3c768faf99a92611a06/output/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.netease.nimlib/lucene/3.3.0/1cb839d0484985a83244b424fd51f29004ec2e23/lucene-3.3.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="basesdk-3.3.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.android/build-cache/d014119bb3fd28f1606949499814505f1e6e771a/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/d014119bb3fd28f1606949499814505f1e6e771a/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/d014119bb3fd28f1606949499814505f1e6e771a/output/jars/libs/cosinesdk.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.netease.nimlib/basesdk/3.3.0/9be6b680e8185297c664deadb43bfcf09e4c28da/basesdk-3.3.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

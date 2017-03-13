@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="chatroom-3.3.0">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.android/build-cache/0395673e3d3f84a1a57c0788ffa00217ab9787ad/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/0395673e3d3f84a1a57c0788ffa00217ab9787ad/output/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.netease.nimlib/chatroom/3.3.0/3343a1160154378a3217f3002d068d8a03030dc/chatroom-3.3.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="avchat-3.3.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.android/build-cache/b0cb596d23e84c4c6a52bb3aeb007859da3355d5/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/b0cb596d23e84c4c6a52bb3aeb007859da3355d5/output/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.netease.nimlib/avchat/3.3.0/b5a57423456273ad33da361e8f371340e82eeb57/avchat-3.3.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.baidu.location.Address;
 import com.baidu.location.BDLocation;
@@ -14,19 +15,33 @@ import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.utils.DistanceUtil;
 
 public class MainActivity extends Activity {
 
-    public LocationClient mLocationClient = null;
-    public BDLocationListener myListener = new MyLocationListener();
-    MapView mMapView = null;
-    BaiduMap mBaiduMap=null;
+    private LocationClient mLocationClient = null;
+    private BDLocationListener myListener = new MyLocationListener();
+    private MapView mMapView = null;
+    private BaiduMap mBaiduMap=null;
+    private LatLng mPointDes = new LatLng(39.963175, 116.400244);
+    private boolean focusable=true;
+    private TextView mDesLocation;
+    private TextView mDesLocationInfo;
+    private TextView mPresentLocation;
+    private TextView mPresentLocationInfo;
+    private TextView mPresentDistance;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,33 +49,41 @@ public class MainActivity extends Activity {
         //注意该方法要再setContentView方法之前实现
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_main);
-
-        //获取地图控件引用
-        mMapView = (MapView) findViewById(R.id.bmapView);
-        mBaiduMap = mMapView.getMap();
-
-//普通地图
-        mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
-
-//卫星地图
-       // mBaiduMap.setMapType(BaiduMap.MAP_TYPE_SATELLITE);
-
-//空白地图, 基础地图瓦片将不会被渲染。在地图类型中设置为NONE，将不会使用流量下载基础地图瓦片图层。使用场景：与瓦片图层一起使用，节省流量，提升自定义瓦片图下载速度。
-        //mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NONE);
-
-        mLocationClient = new LocationClient(getApplicationContext());     //声明LocationClient类
-        mLocationClient.registerLocationListener( myListener );    //注册监听函数
+        initViews();
+        initBaiduMap();
         initLocation();
-        mLocationClient.start();
 
         addMark();
+    }
 
+    private void initViews(){
+        //获取地图控件引用
+        mMapView = (MapView) findViewById(R.id.bmapView);
+        mDesLocation=(TextView)findViewById(R.id.desLocation);
+        mDesLocationInfo=(TextView)findViewById(R.id.desLocationInfo);
+        mPresentLocation=(TextView)findViewById(R.id.presentLocation);
+        mPresentLocationInfo=(TextView)findViewById(R.id.presentLocationInfo);
+        mPresentDistance=(TextView)findViewById(R.id.presentDistance);
+    }
+
+    private void initBaiduMap(){
+        mBaiduMap = mMapView.getMap();
+        //普通地图
+        mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
+        //卫星地图
+        // mBaiduMap.setMapType(BaiduMap.MAP_TYPE_SATELLITE);
+        //空白地图, 基础地图瓦片将不会被渲染。在地图类型中设置为NONE，将不会使用流量下载基础地图瓦片图层。使用场景：与瓦片图层一起使用，节省流量，提升自定义瓦片图下载速度。
+        //mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NONE);
+        // 开启定位图层
+        mBaiduMap.setMyLocationEnabled(true);
     }
 
     private void initLocation(){
+        mLocationClient = new LocationClient(getApplicationContext());     //声明LocationClient类
+        mLocationClient.registerLocationListener( myListener );    //注册监听函数
+        mLocationClient.start();
         LocationClientOption option = new LocationClientOption();
-        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy
-        );//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
+        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
         option.setCoorType("bd09ll");//可选，默认gcj02，设置返回的定位结果坐标系
         int span=1000;
         option.setScanSpan(span);//可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
@@ -75,7 +98,7 @@ public class MainActivity extends Activity {
         mLocationClient.setLocOption(option);
     }
 
-    public class MyLocationListener implements BDLocationListener {
+    private class MyLocationListener implements BDLocationListener {
 
         @Override
         public void onReceiveLocation(BDLocation location) {
@@ -85,10 +108,68 @@ public class MainActivity extends Activity {
                 Log.v("albert", "province:"+address.province);
                 Log.v("albert", "city:"+address.city);
                 Log.v("albert", "street:"+address.street);
+                String s="详细信息："+address.country+" ";
+                s+=address.province+" ";
+                s+=address.city+" ";
+                s+=address.street;
+                mPresentLocationInfo.setText(s);
             }
             updatePosition(location);
+            mPresentLocation.setText("当前坐标：( "+location.getLatitude()+" , "+location.getLongitude()+" )");
         }
     }
+
+    private void updatePosition(BDLocation location){
+        // 构造定位数据
+        MyLocationData locData = new MyLocationData.Builder()
+                .accuracy(location.getRadius())
+                // 此处设置开发者获取到的方向信息，顺时针0-360
+                .direction(100).latitude(location.getLatitude())
+                .longitude(location.getLongitude()).build();
+        // 设置定位数据
+        mBaiduMap.setMyLocationData(locData);
+        // 设置定位图层的配置（定位模式，是否允许方向信息，用户自定义定位图标）
+//        BitmapDescriptor mCurrentMarker = BitmapDescriptorFactory
+//                .fromResource(R.drawable.icon_marka);
+        MyLocationConfiguration config = new MyLocationConfiguration(MyLocationConfiguration.LocationMode.NORMAL, false, null);
+        mBaiduMap.setMyLocationConfigeration(config);
+        // 当不需要定位图层时关闭定位图层
+        //mBaiduMap.setMyLocationEnabled(false)
+        if(focusable) {
+            focusCenterLocation(new LatLng(location.getLatitude(), location.getLongitude()));
+        }
+        mPresentDistance.setText("相距："+(int)DistanceUtil. getDistance(new LatLng(location.getLatitude(),location.getLongitude()),mPointDes)+"米");
+    }
+
+    private void addMark(){
+        //构建Marker图标
+        BitmapDescriptor bitmap = BitmapDescriptorFactory
+                .fromResource(R.drawable.icon_marka);
+        //构建MarkerOption，用于在地图上添加Marker
+        OverlayOptions option = new MarkerOptions()
+                .position(mPointDes)
+                .icon(bitmap);
+        //在地图上添加Marker，并显示
+        mBaiduMap.addOverlay(option);
+        mDesLocation.setText("签到坐标：( "+mPointDes.latitude+" , "+mPointDes.longitude+" )");
+        mDesLocationInfo.setText("详细信息："+"中国 北京 天安门");
+    }
+
+    private void focusCenterLocation(LatLng point){
+        //设定中心点坐标
+        //定义地图状态
+        MapStatus mMapStatus = new MapStatus.Builder()
+                .target(point)
+                .zoom(12)
+                .build();
+        //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
+
+        MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+        //改变地图状态
+        mBaiduMap.setMapStatus(mMapStatusUpdate);
+        focusable=false;
+    }
+
 
     @Override
     protected void onDestroy() {
@@ -107,39 +188,5 @@ public class MainActivity extends Activity {
         super.onPause();
         //在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理
         mMapView.onPause();
-    }
-
-    private void updatePosition(BDLocation location){
-        // 开启定位图层
-        mBaiduMap.setMyLocationEnabled(true);
-// 构造定位数据
-        MyLocationData locData = new MyLocationData.Builder()
-                .accuracy(location.getRadius())
-                // 此处设置开发者获取到的方向信息，顺时针0-360
-                .direction(100).latitude(location.getLatitude())
-                .longitude(location.getLongitude()).build();
-// 设置定位数据
-        mBaiduMap.setMyLocationData(locData);
-// 设置定位图层的配置（定位模式，是否允许方向信息，用户自定义定位图标）
-        BitmapDescriptor mCurrentMarker = BitmapDescriptorFactory
-                .fromResource(R.drawable.icon_marka);
-        MyLocationConfiguration config = new MyLocationConfiguration(MyLocationConfiguration.LocationMode.NORMAL, true, mCurrentMarker);
-        mBaiduMap.setMyLocationConfigeration(config);
-// 当不需要定位图层时关闭定位图层
-        //mBaiduMap.setMyLocationEnabled(false);
-    }
-
-    private void addMark(){
-        //定义Maker坐标点
-        LatLng point = new LatLng(39.963175, 116.400244);
-//构建Marker图标
-        BitmapDescriptor bitmap = BitmapDescriptorFactory
-                .fromResource(R.drawable.icon_marka);
-//构建MarkerOption，用于在地图上添加Marker
-        OverlayOptions option = new MarkerOptions()
-                .position(point)
-                .icon(bitmap);
-//在地图上添加Marker，并显示
-        mBaiduMap.addOverlay(option);
     }
 }
