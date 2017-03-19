@@ -1,192 +1,169 @@
 package com.feiwanghua.ding;
 
-import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.baidu.location.Address;
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
-import com.baidu.mapapi.SDKInitializer;
-import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.BitmapDescriptor;
-import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.MapStatus;
-import com.baidu.mapapi.map.MapStatusUpdate;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.map.MyLocationConfiguration;
-import com.baidu.mapapi.map.MyLocationData;
-import com.baidu.mapapi.map.OverlayOptions;
-import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.utils.DistanceUtil;
+import com.albert.firebase.UploadUtil;
+import com.albert.firebase.UserInfo;
+import com.feiwanghua.ding.baidumap.BaiduMapView;
 
-public class MainActivity extends Activity {
-
-    private LocationClient mLocationClient = null;
-    private BDLocationListener myListener = new MyLocationListener();
-    private MapView mMapView = null;
-    private BaiduMap mBaiduMap=null;
-    private LatLng mPointDes = new LatLng(39.963175, 116.400244);
-    private boolean focusable=true;
-    private TextView mDesLocation;
-    private TextView mDesLocationInfo;
-    private TextView mPresentLocation;
-    private TextView mPresentLocationInfo;
-    private TextView mPresentDistance;
-
-
-
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
+    BaiduMapView mBaiduMapView;
+    NavigationView mNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //在使用SDK各组件之前初始化context信息，传入ApplicationContext
-        //注意该方法要再setContentView方法之前实现
-        SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_main);
-        initViews();
-        initBaiduMap();
-        initLocation();
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        addMark();
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+        mNavigationView.setNavigationItemSelectedListener(this);
+        mBaiduMapView = new BaiduMapView(this);
+
+        mNavigationView.getHeaderView(0).setOnClickListener(mLoginListener);
     }
 
-    private void initViews(){
-        //获取地图控件引用
-        mMapView = (MapView) findViewById(R.id.bmapView);
-        mDesLocation=(TextView)findViewById(R.id.desLocation);
-        mDesLocationInfo=(TextView)findViewById(R.id.desLocationInfo);
-        mPresentLocation=(TextView)findViewById(R.id.presentLocation);
-        mPresentLocationInfo=(TextView)findViewById(R.id.presentLocationInfo);
-        mPresentDistance=(TextView)findViewById(R.id.presentDistance);
-    }
-
-    private void initBaiduMap(){
-        mBaiduMap = mMapView.getMap();
-        //普通地图
-        mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
-        //卫星地图
-        // mBaiduMap.setMapType(BaiduMap.MAP_TYPE_SATELLITE);
-        //空白地图, 基础地图瓦片将不会被渲染。在地图类型中设置为NONE，将不会使用流量下载基础地图瓦片图层。使用场景：与瓦片图层一起使用，节省流量，提升自定义瓦片图下载速度。
-        //mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NONE);
-        // 开启定位图层
-        mBaiduMap.setMyLocationEnabled(true);
-    }
-
-    private void initLocation(){
-        mLocationClient = new LocationClient(getApplicationContext());     //声明LocationClient类
-        mLocationClient.registerLocationListener( myListener );    //注册监听函数
-        mLocationClient.start();
-        LocationClientOption option = new LocationClientOption();
-        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
-        option.setCoorType("bd09ll");//可选，默认gcj02，设置返回的定位结果坐标系
-        int span=1000;
-        option.setScanSpan(span);//可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
-        option.setIsNeedAddress(true);//可选，设置是否需要地址信息，默认不需要
-        option.setOpenGps(true);//可选，默认false,设置是否使用gps
-        option.setLocationNotify(true);//可选，默认false，设置是否当GPS有效时按照1S/1次频率输出GPS结果
-        option.setIsNeedLocationDescribe(true);//可选，默认false，设置是否需要位置语义化结果，可以在BDLocation.getLocationDescribe里得到，结果类似于“在北京天安门附近”
-        option.setIsNeedLocationPoiList(true);//可选，默认false，设置是否需要POI结果，可以在BDLocation.getPoiList里得到
-        option.setIgnoreKillProcess(false);//可选，默认true，定位SDK内部是一个SERVICE，并放到了独立进程，设置是否在stop的时候杀死这个进程，默认不杀死
-        option.SetIgnoreCacheException(false);//可选，默认false，设置是否收集CRASH信息，默认收集
-        option.setEnableSimulateGps(false);//可选，默认false，设置是否需要过滤GPS仿真结果，默认需要
-        mLocationClient.setLocOption(option);
-    }
-
-    private class MyLocationListener implements BDLocationListener {
-
+    View.OnClickListener mLoginListener = new View.OnClickListener(){
         @Override
-        public void onReceiveLocation(BDLocation location) {
-            Address address=location.getAddress();
-            if(location!=null) {
-                Log.v("albert", "country:"+address.country);
-                Log.v("albert", "province:"+address.province);
-                Log.v("albert", "city:"+address.city);
-                Log.v("albert", "street:"+address.street);
-                String s="详细信息："+address.country+" ";
-                s+=address.province+" ";
-                s+=address.city+" ";
-                s+=address.street;
-                mPresentLocationInfo.setText(s);
+        public void onClick(View view) {
+            startActivityForResult(new Intent(MainActivity.this,LoginActivity.class),100);
+        }
+    };
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_camera) {
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
+
+        } else if (id == R.id.nav_slideshow) {
+
+        } else if (id == R.id.nav_manage) {
+
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 100) {
+            // 从相册返回的数据
+            if (data != null) {
+                // 得到图片的全路径
+                Uri uri = data.getData();
+                UploadUtil.imageUpload(uri,new UploadUtil.Callback(){
+                    @Override
+                    public void succeed(Uri uri) {
+
+                    }
+
+                    @Override
+                    public void failed() {
+
+                    }
+                });
             }
-            updatePosition(location);
-            mPresentLocation.setText("当前坐标：( "+location.getLatitude()+" , "+location.getLongitude()+" )");
+
         }
     }
-
-    private void updatePosition(BDLocation location){
-        // 构造定位数据
-        MyLocationData locData = new MyLocationData.Builder()
-                .accuracy(location.getRadius())
-                // 此处设置开发者获取到的方向信息，顺时针0-360
-                .direction(100).latitude(location.getLatitude())
-                .longitude(location.getLongitude()).build();
-        // 设置定位数据
-        mBaiduMap.setMyLocationData(locData);
-        // 设置定位图层的配置（定位模式，是否允许方向信息，用户自定义定位图标）
-//        BitmapDescriptor mCurrentMarker = BitmapDescriptorFactory
-//                .fromResource(R.drawable.icon_marka);
-        MyLocationConfiguration config = new MyLocationConfiguration(MyLocationConfiguration.LocationMode.NORMAL, false, null);
-        mBaiduMap.setMyLocationConfigeration(config);
-        // 当不需要定位图层时关闭定位图层
-        //mBaiduMap.setMyLocationEnabled(false)
-        if(focusable) {
-            focusCenterLocation(new LatLng(location.getLatitude(), location.getLongitude()));
-        }
-        mPresentDistance.setText("相距："+(int)DistanceUtil. getDistance(new LatLng(location.getLatitude(),location.getLongitude()),mPointDes)+"米");
-    }
-
-    private void addMark(){
-        //构建Marker图标
-        BitmapDescriptor bitmap = BitmapDescriptorFactory
-                .fromResource(R.drawable.icon_marka);
-        //构建MarkerOption，用于在地图上添加Marker
-        OverlayOptions option = new MarkerOptions()
-                .position(mPointDes)
-                .icon(bitmap);
-        //在地图上添加Marker，并显示
-        mBaiduMap.addOverlay(option);
-        mDesLocation.setText("签到坐标：( "+mPointDes.latitude+" , "+mPointDes.longitude+" )");
-        mDesLocationInfo.setText("详细信息："+"中国 北京 天安门");
-    }
-
-    private void focusCenterLocation(LatLng point){
-        //设定中心点坐标
-        //定义地图状态
-        MapStatus mMapStatus = new MapStatus.Builder()
-                .target(point)
-                .zoom(12)
-                .build();
-        //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
-
-        MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
-        //改变地图状态
-        mBaiduMap.setMapStatus(mMapStatusUpdate);
-        focusable=false;
-    }
-
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
-        mMapView.onDestroy();
+        mBaiduMapView.onDestroy();
     }
+
     @Override
     protected void onResume() {
         super.onResume();
-        //在activity执行onResume时执行mMapView. onResume ()，实现地图生命周期管理
-        mMapView.onResume();
+        mBaiduMapView.onResume();
+        resumeLogin();
     }
+
     @Override
     protected void onPause() {
         super.onPause();
-        //在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理
-        mMapView.onPause();
+        mBaiduMapView.onPause();
+    }
+
+    private void resumeLogin(){
+
+        if(!LoginInfo.getName(getApplicationContext()).equals("")){
+            ((TextView)mNavigationView.getHeaderView(0).findViewById(R.id.name)).setText(LoginInfo.getName(getApplicationContext()));
+        }
+
+        if(!LoginInfo.getPhoto(getApplicationContext()).equals("")){
+            ImageView imageview = ((ImageView)mNavigationView.getHeaderView(0).findViewById(R.id.photo));
+        }
+
+        if(!LoginInfo.getEmail(getApplicationContext()).equals("")){
+            ((TextView)mNavigationView.getHeaderView(0).findViewById(R.id.email)).setText(LoginInfo.getEmail(getApplicationContext()));
+
+        }
     }
 }

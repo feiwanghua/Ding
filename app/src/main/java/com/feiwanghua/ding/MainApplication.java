@@ -7,6 +7,9 @@ import android.graphics.Color;
 import android.os.Environment;
 import android.util.Log;
 import android.view.WindowManager;
+
+import com.baidu.mapapi.SDKInitializer;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.SDKOptions;
 import com.netease.nimlib.sdk.StatusBarNotificationConfig;
@@ -21,8 +24,13 @@ import com.netease.nimlib.sdk.uinfo.UserInfoProvider;
 public class MainApplication extends Application {
     @Override
     public void onCreate() {
-        Log.v("albert","MainApplication onCreate");
+        Log.v("albert", "MainApplication onCreate");
         super.onCreate();
+
+        //在使用SDK各组件之前初始化context信息，传入ApplicationContext
+        //注意该方法要再setContentView方法之前实现
+        SDKInitializer.initialize(getApplicationContext());
+
         // ... your codes
 
         // SDK初始化（启动后台服务，若已经存在用户登录信息， SDK 将完成自动登录）
@@ -30,10 +38,13 @@ public class MainApplication extends Application {
 
         // ... your codes
         //if (inMainProcess()) {
-            // 注意：以下操作必须在主进程中进行
-            // 1、UI相关初始化操作
-            // 2、相关Service调用
+        // 注意：以下操作必须在主进程中进行
+        // 1、UI相关初始化操作
+        // 2、相关Service调用
         //}
+
+        // Obtain the FirebaseAnalytics instance.
+        FirebaseAnalytics.getInstance(this);
     }
 
     // 如果返回值为 null，则全部使用默认参数。
@@ -42,7 +53,7 @@ public class MainApplication extends Application {
 
         // 如果将新消息通知提醒托管给 SDK 完成，需要添加以下配置。否则无需设置。
         StatusBarNotificationConfig config = new StatusBarNotificationConfig();
-        config.notificationEntrance = MainActivity.class; // 点击通知栏跳转到该Activity
+        config.notificationEntrance = MapActivity.class; // 点击通知栏跳转到该Activity
         config.notificationSmallIconId = R.drawable.icon_marka;
         // 呼吸灯配置
         config.ledARGB = Color.GREEN;
@@ -64,7 +75,7 @@ public class MainApplication extends Application {
 
         // 配置附件缩略图的尺寸大小。表示向服务器请求缩略图文件的大小
         // 该值一般应根据屏幕尺寸来确定， 默认值为 Screen.width / 2
-        options.thumbnailSize = ((WindowManager)getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getWidth() / 2;
+        options.thumbnailSize = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getWidth() / 2;
 
         // 用户资料提供者, 目前主要用于提供用户资料，用于新消息通知栏中显示消息来源的头像和昵称
         options.userInfoProvider = new UserInfoProvider() {
