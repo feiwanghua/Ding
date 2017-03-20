@@ -47,6 +47,7 @@ public class RegisterActivity extends Activity {
         mPhone = (EditText) findViewById(R.id.phone);
         mRegiester = (Button) findViewById(R.id.register);
         mMsg = (TextView) findViewById(R.id.msg);
+
         mRegiester.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
