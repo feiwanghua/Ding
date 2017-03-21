@@ -21,6 +21,15 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/feiwanghua/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/10/picasso-2.5.2_670ac48832f66e4be44e6c0194b179a65ec30e2d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/feiwanghua/.android/build-cache/ab3082178231cebe21b1d3c768faf99a92611a06/output/jars/classes.jar"
         jumboMode="true"
         optimize="true"
@@ -243,6 +252,15 @@
         revision="25.0.0"
         sha1="3148ba5ce1b4ea9528a588d484572f184d142983">
         <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_455ca2941e013c9a79795cc5d27be5e642d0c886/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/feiwanghua/.android/build-cache/a21f78833094ceb0e948527b265983f7019f6952/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="8b534207608aa1c205263d7426e634872ae34f08">
+        <dex dex="/Users/feiwanghua/Desktop/Ding/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_3accd4624330e34151df9c8cedab2c044f4bd53f/classes.dex" />
     </item>
     <item
         is-multidex="true"

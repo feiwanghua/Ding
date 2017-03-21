@@ -68,5 +68,7 @@ dependencies {
     // 全文检索服务需要
     compile 'com.netease.nimlib:lucene:3.3.0'
 
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.victor:lib:1.0.4'
 }
 apply plugin: 'com.google.gms.google-services'

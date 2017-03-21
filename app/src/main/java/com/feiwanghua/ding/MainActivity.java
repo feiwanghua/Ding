@@ -1,6 +1,7 @@
 package com.feiwanghua.ding;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.LruCache;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,11 +22,16 @@ import android.widget.TextView;
 import com.albert.firebase.UploadUtil;
 import com.albert.firebase.UserInfo;
 import com.feiwanghua.ding.baidumap.BaiduMapView;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     BaiduMapView mBaiduMapView;
     NavigationView mNavigationView;
+    private LruCache<String, Bitmap> mMemoryCache;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,12 +50,24 @@ public class MainActivity extends AppCompatActivity
         mBaiduMapView = new BaiduMapView(this);
 
         mNavigationView.getHeaderView(0).setOnClickListener(mLoginListener);
+
+        // 获取到可用内存的最大值，使用内存超出这个值会引起OutOfMemory异常。
+        // LruCache通过构造函数传入缓存值，以KB为单位。
+        int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+        // 使用最大可用内存值的1/8作为缓存的大小。
+        int cacheSize = maxMemory / 8;
+        mMemoryCache = new LruCache<String, Bitmap>(cacheSize){
+            @Override
+            protected int sizeOf(String key, Bitmap value) {
+                return value.getByteCount() / 1024;
+            }
+        };
     }
 
     View.OnClickListener mLoginListener = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
-            startActivityForResult(new Intent(MainActivity.this,LoginActivity.class),100);
+            startActivity(new Intent(MainActivity.this,LoginActivity.class));
         }
     };
 
@@ -110,29 +129,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 100) {
-            // 从相册返回的数据
-            if (data != null) {
-                // 得到图片的全路径
-                Uri uri = data.getData();
-                UploadUtil.imageUpload(uri,new UploadUtil.Callback(){
-                    @Override
-                    public void succeed(Uri uri) {
-
-                    }
-
-                    @Override
-                    public void failed() {
-
-                    }
-                });
-            }
-
-        }
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         mBaiduMapView.onDestroy();
@@ -158,12 +154,48 @@ public class MainActivity extends AppCompatActivity
         }
 
         if(!LoginInfo.getPhoto(getApplicationContext()).equals("")){
-            ImageView imageview = ((ImageView)mNavigationView.getHeaderView(0).findViewById(R.id.photo));
+            final ImageView imageview = ((ImageView)mNavigationView.getHeaderView(0).findViewById(R.id.photo));
+            Bitmap bitmap = getBitmapFromMemCache(LoginInfo.getPhoto(getApplicationContext()));
+            if(bitmap!=null){
+                imageview.setImageBitmap(bitmap);
+            }else {
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            final Bitmap bitmap = Picasso.with(getApplicationContext()).load(LoginInfo.getPhoto(getApplicationContext())).get();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    imageview.setImageBitmap(bitmap);
+                                    addBitmapToMemoryCache(LoginInfo.getPhoto(getApplicationContext()),bitmap);
+                                }
+                            });
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+
+            }
+
         }
 
         if(!LoginInfo.getEmail(getApplicationContext()).equals("")){
             ((TextView)mNavigationView.getHeaderView(0).findViewById(R.id.email)).setText(LoginInfo.getEmail(getApplicationContext()));
 
         }
+    }
+
+    public void addBitmapToMemoryCache(String key, Bitmap bitmap) {
+        if (getBitmapFromMemCache(key) == null) {
+            mMemoryCache.put(key, bitmap);
+        }
+    }
+
+    public Bitmap getBitmapFromMemCache(String key) {
+        return mMemoryCache.get(key);
     }
 }

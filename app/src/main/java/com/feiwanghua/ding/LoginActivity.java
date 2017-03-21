@@ -2,9 +2,7 @@ package com.feiwanghua.ding;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -12,8 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.albert.firebase.UploadUtil;
 import com.albert.firebase.UserHelper;
 import com.albert.firebase.UserInfo;
 
@@ -27,7 +23,7 @@ public class LoginActivity extends Activity {
     private EditText mPassword;
     private Button mLogin;
     private TextView mRegister;
-    private TextView mMsg;
+    private TextView mLoading;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +34,8 @@ public class LoginActivity extends Activity {
     private void initView(){
         mNo = (EditText) findViewById(R.id.no);
         mPassword = (EditText) findViewById(R.id.password);
-        mMsg = (TextView) findViewById(R.id.msg);
         mLogin = (Button) findViewById(R.id.login);
+        mLoading = (TextView) findViewById(R.id.loading);
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,27 +48,25 @@ public class LoginActivity extends Activity {
                     return;
                 }
                 mLogin.setEnabled(false);
+                mLoading.setVisibility(View.VISIBLE);
                 UserHelper.getInstance().login(new UserInfo(mNo.getText().toString(),null,mPassword.getText().toString(),null,null,null),
                     new UserHelper.Callback(){
 
                         @Override
                         public void succeed(UserInfo userInfo) {
                             Log.v("albert","login succeed");
+                            Toast.makeText(getApplicationContext(),"登录成功",Toast.LENGTH_SHORT).show();
                             LoginInfo.setUserInfo(getApplicationContext(),userInfo);
+                            mLoading.setVisibility(View.INVISIBLE);
                             finish();
                         }
 
                         @Override
                         public void failed() {
                             Log.v("albert","login failed");
-                            mMsg.setText("登录失败");
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    mMsg.setText("");
-                                }
-                            },2000);
+                            Toast.makeText(getApplicationContext(),"登录失败",Toast.LENGTH_SHORT).show();
                             mLogin.setEnabled(true);
+                            mLoading.setVisibility(View.INVISIBLE);
 
                         }
                     });
