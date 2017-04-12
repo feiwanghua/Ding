@@ -23,6 +23,13 @@ import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
+import com.baidu.mapapi.search.poi.PoiCitySearchOption;
+import com.baidu.mapapi.search.poi.PoiDetailResult;
+import com.baidu.mapapi.search.poi.PoiDetailSearchOption;
+import com.baidu.mapapi.search.poi.PoiIndoorResult;
+import com.baidu.mapapi.search.poi.PoiResult;
+import com.baidu.mapapi.search.poi.PoiSearch;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.feiwanghua.ding.R;
 
@@ -45,12 +52,14 @@ public class BaiduMapView implements View.OnClickListener{
     private TextView mPresentLocationInfo;
     private TextView mPresentDistance;
     private ImageView mFocusView;
+    private PoiSearch mPoiSearch;
 
     public BaiduMapView(Activity activity) {
         mActivity = activity;
         initViews();
         initBaiduMap();
         initLocation();
+        initSearch();
         addMark();
     }
 
@@ -189,6 +198,7 @@ public class BaiduMapView implements View.OnClickListener{
     public void onDestroy() {
         //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
         mMapView.onDestroy();
+        mPoiSearch.destroy();
     }
 
     public void onResume() {
@@ -199,5 +209,38 @@ public class BaiduMapView implements View.OnClickListener{
     public void onPause() {
         //在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理
         mMapView.onPause();
+    }
+
+    private void initSearch(){
+        mPoiSearch = PoiSearch.newInstance();
+        OnGetPoiSearchResultListener poiListener = new OnGetPoiSearchResultListener(){
+            public void onGetPoiResult(PoiResult result){
+                //获取POI检索结果
+                Log.v("albert", "onGetPoiResult");
+                if(result.isHasAddrInfo()) {
+                    for (int i = 0; i < result.getAllAddr().size(); i++) {
+                        Log.v("albert", "address:" + result.getAllAddr().get(i).address);
+                        Log.v("albert", "location.latitude:" + result.getAllPoi().get(i).location.latitude);
+                        Log.v("albert", "location.longitude:" + result.getAllPoi().get(i).location.longitude);
+                    }
+                }
+            }
+            public void onGetPoiDetailResult(PoiDetailResult result){
+                //获取Place详情页检索结果
+                Log.v("albert", "onGetPoiDetailResult");
+//                Log.v("albert","latitude:"+result.getLocation().latitude);
+//                Log.v("albert","longitude:"+result.getLocation().longitude);
+            }
+
+            @Override
+            public void onGetPoiIndoorResult(PoiIndoorResult poiIndoorResult) {
+                Log.v("albert", "onGetPoiIndoorResult");
+            }
+        };
+        mPoiSearch.setOnGetPoiSearchResultListener(poiListener);
+        mPoiSearch.searchInCity((new PoiCitySearchOption())
+                .city("杭州")
+                .keyword("美食")
+                .pageNum(10));
     }
 }
